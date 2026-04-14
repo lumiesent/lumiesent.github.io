@@ -3,30 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moje Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>Portfolio Graficzne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container fade-in">
-        <div class="card">
-            <img src="https://via.placeholder.com/150" alt="profilowe" class="profile-img">
-            
-            <h1 class="name">Jan Kowalski</h1>
-            <p class="title">Front-end Developer | UI Designer</p>
-            
-            <p class="bio">
-                Cześć! Tworzę nowoczesne, responsywne i estetyczne strony internetowe. 
-                Uwielbiam czysty kod i minimalistyczny design. Zapraszam do moich projektów!
-            </p>
-            
-            <div class="links">
-                <a href="https://github.com/TwojNick" class="btn" target="_blank">Mój GitHub</a>
-                <a href="https://linkedin.com/in/TwojProfil" class="btn" target="_blank">LinkedIn</a>
-                <a href="mailto:twoj@email.com" class="btn btn-outline">Napisz do mnie</a>
-            </div>
-        </div>
+    <div class="lang-switcher">
+        <button id="lang-pl" class="lang-btn active">🇵🇱</button>
+        <button id="lang-en" class="lang-btn">🇬🇧</button>
     </div>
+
+    <header class="hero fade-in">
+        <img src="https://via.placeholder.com/150" alt=" " class="profile-img">
+        <h1 class="name" data-i18n="name">Lumiesent</h1>
+        <p class="brand-name" data-i18n="brand_name">Patryk Czyżewski</p>
+        <p class="title" data-i18n="job_title">Graphic Designer | Illustrator</p>
+        <p class="bio" data-i18n="bio">
+            Projektuję identyfikacje wizualne, ilustracje i materiały do druku. 
+            Inspiruje mnie natura, minimalizm i organiczne kształty.
+        </p>
+        <div class="links">
+            <a href="#" class="btn btn-outline" data-i18n="behance">Behance</a>
+            <a href="#portfolio" class="btn" data-i18n="see_portfolio">Moje Portfolio</a>
+            <a href="#kontakt" class="btn btn-outline" data-i18n="contact">Kontakt</a>
+        </div>
+
+        <a href="#portfolio" class="scroll-down">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+        
+    </header>
+
+    <main class="container fade-in" id="portfolio">
+        <div class="card">
+            
+            <section class="projects-section">
+                <h2 class="section-title" data-i18n="selected_projects">Wybrane Projekty</h2>
+                <div class="projects-grid">
+                    
+                    <a href="projekt1.html" class="project-item">
+                        <img src="https://via.placeholder.com/400x400" alt=" " class="project-img">
+                        <div class="project-overlay">
+                            <h3 class="project-title" data-i18n="proj1_title">Branding Kawiarni</h3>
+                            <p class="project-desc" data-i18n="proj1_desc">Identyfikacja wizualna i opakowania</p>
+                        </div>
+                    </a>
+
+                    <a href="projekt2.html" class="project-item">
+                        <img src="https://via.placeholder.com/400x400" alt=" " class="project-img">
+                        <div class="project-overlay">
+                            <h3 class="project-title" data-i18n="proj2_title">Plakaty Festiwalowe</h3>
+                            <p class="project-desc" data-i18n="proj2_desc">Seria ilustracji na wydarzenie</p>
+                        </div>
+                    </a>
+
+                    <a href="projekt3.html" class="project-item">
+                        <img src="https://via.placeholder.com/400x400" alt=" " class="project-img">
+                        <div class="project-overlay">
+                            <h3 class="project-title" data-i18n="proj3_title">Aplikacja Mobilna</h3>
+                            <p class="project-desc" data-i18n="proj3_desc">Projekt interfejsu (UI/UX)</p>
+                        </div>
+                    </a>
+
+                    <a href="projekt4.html" class="project-item">
+                        <img src="https://via.placeholder.com/400x400" alt=" " class="project-img">
+                        <div class="project-overlay">
+                            <h3 class="project-title" data-i18n="proj4_title">Logo Folio</h3>
+                            <p class="project-desc" data-i18n="proj4_desc">Zbiór znaków z 2023 roku</p>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <footer class="contact-section" id="kontakt">
+                <h2 class="section-title" data-i18n="talk_title">Porozmawiajmy</h2>
+                <p class="bio" data-i18n="talk_desc">Masz pomysł na projekt lub szukasz grafika do współpracy? Śmiało, napisz do mnie!</p>
+                
+                <div class="contact-details">
+                    <a href="mailto:p.lumiesent@gmail.com" class="contact-link">
+                        <span class="contact-label">Email:</span> p.lumiesent@gmail.com
+                    </a>
+                    <a href="https://instagram.com/lumiesent" target="_blank" class="contact-link">
+                        <span class="contact-label">Instagram:</span> @lumiesent
+                    </a>
+                </div>
+            </footer>
+
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
