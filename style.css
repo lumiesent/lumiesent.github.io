@@ -1,0 +1,124 @@
+/* Reset podstawowych marginesów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Tło strony - delikatny, nowoczesny gradient */
+body {
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Główna karta portfolio */
+.card {
+    background: #ffffff;
+    max-width: 420px;
+    width: 100%;
+    padding: 40px 30px;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Zdjęcie profilowe */
+.profile-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #f0f0f0;
+}
+
+.name {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+}
+
+.title {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+.bio {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Kontener na przyciski */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Główne style przycisków */
+.btn {
+    text-decoration: none;
+    color: #fff;
+    background: #1a1a1a;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #333;
+    transform: scale(1.02);
+}
+
+/* Alternatywny styl przycisku (obramowanie) */
+.btn-outline {
+    background: transparent;
+    color: #1a1a1a;
+    border: 2px solid #1a1a1a;
+}
+
+.btn-outline:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* Początkowy stan animacji (ukryte i przesunięte w dół) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Klasa dodawana przez JS, by pokazać element */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
