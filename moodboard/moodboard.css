@@ -1,0 +1,209 @@
+/* =========================================
+   FUNDAMENTY (Zmienne i Baza)
+   ========================================= */
+:root {
+    --color-vanilla: #F0EAD2;
+    --color-cream: #DDE5B6;
+    --color-olive: #ADC178;
+    --color-copper: #A98467;
+    --color-brown: #6C584C;
+
+    --bg-color: var(--color-vanilla);
+    --text-white: var(--color-cream);
+    --text-primary: var(--color-brown);
+    --text-secondary: var(--color-copper);
+    --accent-primary: var(--color-olive);
+    --accent-secondary: var(--color-brown);
+    --shadow-color: rgba(108, 88, 76, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(-45deg, var(--color-vanilla), var(--color-cream), #F5F0DF, #EBEFDB);
+    background-size: 400% 400%;
+    animation: moveGradient 15s ease infinite;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+::selection {
+    background-color: var(--accent-primary);
+    color: var(--bg-color);
+}
+
+/* =========================================
+   KOMPONENTY (Karta i Przyciski)
+   ========================================= */
+.container {
+    padding: 60px 20px 80px 20px; /* Zmniejszony górny padding */
+    display: flex;
+    flex-direction: column; /* Elementy (przycisk i karta) jeden pod drugim */
+    align-items: center;    /* Centrowanie w osi poziomej */
+}
+
+.back-nav {
+    width: 100%;
+    max-width: 1800px; /* Dokładnie tyle samo co Twoja karta */
+    margin-bottom: 25px; /* Odstęp między przyciskiem a kartą */
+    display: flex;
+    justify-content: flex-start; /* Wyrównanie przycisku do lewej krawędzi */
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    max-width: 1800px; /* Szeroka wersja dla moodboardu */
+    width: 100%;
+    padding: 60px;
+    border-radius: 32px;
+    box-shadow: 0 20px 50px rgba(26, 83, 92, 0.08);
+}
+
+.btn {
+    text-decoration: none;
+    color: var(--text-primary);
+    background: var(--accent-primary);
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--accent-primary);
+}
+
+.btn:hover {
+    background: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   MOODBOARD GRID (Bento)
+   ========================================= */
+.moodboard-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.moodboard-title {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.moodboard-subtitle {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+}
+
+.moodboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.mood-tile {
+    background: var(--color-vanilla);
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    aspect-ratio: 4 / 5;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.mood-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px var(--shadow-color);
+}
+
+.mood-img-full { width: 100%; height: 100%; object-fit: cover; }
+
+.mood-tile.split-y { flex-direction: column; }
+.mood-tile.split-y-rev { flex-direction: column-reverse; }
+.mood-tile.split-x { flex-direction: row; }
+
+.mood-img-part { flex: 1.3; width: 100%; height: 100%; object-fit: cover; }
+
+.mood-text-part {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.mood-text-part h4 { font-size: 24px; margin-bottom: 15px; }
+.mood-text-part p { font-size: 17px; line-height: 1.6; color: var(--text-secondary); }
+
+/* =========================================
+   ANIMACJE I RWD
+   ========================================= */
+.fade-in { opacity: 0; transform: translateY(30px); }
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 1200px) { .moodboard-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) {
+    .moodboard-grid { grid-template-columns: 1fr; }
+    .mood-tile.split-x { flex-direction: column; }
+    .card { padding: 40px 20px; }
+    .moodboard-title { font-size: 32px; }
+}
+
+/* =========================================
+   POPRAWIONA STOPKA MOODBOARDU
+   ========================================= */
+.moodboard-footer {
+    /* 1. Dużo więcej pustej przestrzeni nad stopką (zwiększone z 40px na 120px) */
+    margin-top: 120px; 
+    padding-top: 50px;
+    
+    /* 2. Wyraźniejsza linia oddzielająca */
+    border-top: 1px solid rgba(108, 88, 76, 0.2); 
+    
+    /* 3. Wymuszenie idealnego centrowania */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+/* Styl dla Twojego nazwiska w stopce */
+.moodboard-footer .brand-name {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--accent-secondary);
+    margin-bottom: 10px;
+    display: block; /* Gwarantuje, że nazwisko zajmie osobny wiersz */
+}
+
+/* Dodatkowy opis w stopce */
+.moodboard-footer p:last-child {
+    font-size: 14px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}

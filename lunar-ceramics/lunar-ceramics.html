@@ -34,7 +34,7 @@
 
         body {
             /* Tło widoczne poza kontenerem na dużych ekranach */
-            background-color: #22170f; 
+            background-color: #F0EAD2; 
             display: flex;
             justify-content: center;
             padding: 40px 20px;
@@ -81,6 +81,8 @@
             display: flex;
             align-items: center;
             gap: 40px;
+            position: relative; /* Dodane: pozwala na użycie z-index */
+            z-index: 10;        /* Dodane: wyciąga menu na wierzch, ponad logo */
         }
 
         nav a {
@@ -130,7 +132,7 @@
         .about-image {
             width: 592px; 
             flex-shrink: 0;
-            background-image: url(Hanging-Wall-Sign-MockUp-3.png);
+            background-image: url(images/Hanging-Wall-Sign-MockUp-3.png);
             background-size: cover;
             background-position: center;
             border-radius: 60px 0 0 60px;
@@ -162,7 +164,7 @@
         .learn-image {
             width: 590px; 
             flex-shrink: 0;
-            background-image: url(pexels-cottonbro-6692604.jpg);
+            background-image: url(images/pexels-cottonbro-6692604.jpg);
             background-size: cover;
             background-position: center;
             border-radius: 0 60px 60px 0;
@@ -213,7 +215,7 @@
         .coffee-image {
             width: 592px; 
             flex-shrink: 0;
-            background-image: url(Lunar-Ceramics-Coffee-Brand-Mockup-2.png);
+            background-image: url(images/Lunar-Ceramics-Coffee-Brand-Mockup-2.png);
             background-size: cover;
             background-position: center;
             border-radius: 60px 0 0 60px;
@@ -332,7 +334,8 @@
            MEDIA QUERIES - RESPONSYWNOŚĆ
            ========================================= */
 
-        @media (max-width: 1320px) {
+        /* Dla dużych ekranów (np. desktopy) */
+        @media (max-width: 1420px) {
             body { 
                 padding: 0; 
                 background-color: var(--c-brown-main); 
@@ -342,7 +345,24 @@
             }
         }
 
-        @media (max-width: 1024px) {
+        /* Dla tabletów i mniejszych laptopów */
+        @media (max-width: 1224px) {
+            header {
+                flex-direction: column;
+                padding: 60px;
+                gap: 80px;
+            }
+
+            nav { 
+                gap: 20px; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+            }
+
+            nav a { font-size: 34px; }
+            h1, h2 { font-size: 54px; }
+            p { font-size: 28px; }
+
             .section-about, .section-learn, .section-coffee {
                 flex-direction: column;
             }
@@ -391,13 +411,23 @@
                 margin-top: 40px;
                 padding: 0 40px;
             }
-        }
 
+            .logo img {
+                width: 180px;
+                transform: scale(3.5); 
+                transform-origin: center; 
+                position: relative;
+                left: 0px; 
+                top: 20px;
+            }
+        }
+ 
+        /* Dla bardzo małych ekranów (np. smartfony) */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
-                padding: 30px;
-                gap: 30px;
+                padding: 60px;
+                gap: 80px;
             }
 
             nav { 
@@ -420,13 +450,29 @@
             
             footer { padding: 40px 20px; }
 
+            /* Styl dla Twojego nazwiska w stopce */
+            .footer .brand-name {
+                font-size: 22px;
+                font-weight: 500;
+                color: var(--accent-secondary);
+                margin-bottom: 10px;
+                display: block; /* Gwarantuje, że nazwisko zajmie osobny wiersz */
+            }
+
+            /* Dodatkowy opis w stopce */
+            .footer p:last-child {
+                font-size: 14px;
+                color: var(--text-secondary);
+                letter-spacing: 1px;
+            }
+
             .logo img {
                 width: 180px;
                 transform: scale(3); 
                 transform-origin: center; 
                 position: relative;
                 left: 0px; 
-                top: 0px;
+                top: 20px;
             }
         }
     </style>
@@ -437,7 +483,7 @@
         
         <header>
             <div class="logo">
-                <img src="Lunar-Ceramics-woBg.png" alt="Lunar Ceramics">
+                <img src="images/Lunar-Ceramics-woBg.png" alt="Lunar Ceramics">
             </div>
             <nav>
                 <a href="#about">About</a>
@@ -537,10 +583,8 @@
         <footer>
             <p>Crafting silence and beauty from the earth since 2024. Visit our studio to experience the magic of clay and coffee.<br>
             Follow our journey through the stars and kilns on social media.</p>
-            <p style="font-size: 20px;">Design by: Patryk Czyżewski (Lumiesent)</p>
+            <p style="font-size: 20px; color: #ADC178;">2026 • Patryk Czyżewski • Lumiesent</p>
         </footer>
-
     </div>
-
 </body>
 </html>

@@ -18,14 +18,15 @@
         <img src="https://via.placeholder.com/150" alt=" " class="profile-img">
         <h1 class="name" data-i18n="name">Lumiesent</h1>
         <p class="brand-name" data-i18n="brand_name">Patryk Czyżewski</p>
-        <p class="title" data-i18n="job_title">Graphic Designer | Illustrator</p>
+        <p class="title" data-i18n="job_title">Ilustrator, Grafik & Frontend Developer</p>
         <p class="bio" data-i18n="bio">
-            Projektuję identyfikacje wizualne, ilustracje i materiały do druku. 
-            Inspiruje mnie natura, minimalizm i organiczne kształty.
+            Projektuję identyfikacje wizualne, strony internetowe, ilustracje i materiały do druku. 
         </p>
+        
         <div class="links">
-            <a href="#" class="btn btn-outline" data-i18n="behance">Behance</a>
-            <a href="#portfolio" class="btn" data-i18n="see_portfolio">Moje Portfolio</a>
+            <a href="https://www.behance.net/lumiesent" class="btn btn-outline" data-i18n="behance">Behance</a>
+            <a href="#portfolio" class="btn" data-i18n="see_portfolio">Portfolio</a>
+            <a href="#design" class="btn btn-outline" data-i18n="design_menu">Projekty</a>
             <a href="#kontakt" class="btn btn-outline" data-i18n="contact">Kontakt</a>
         </div>
 
@@ -37,6 +38,66 @@
         
     </header>
 
+    <main class="container">
+        <div class="card fade-in" id="portfolio">
+            <section class="projects-section">
+                <h2 class="section-title" data-i18n="selected_projects">Portfolio</h2>
+                <p class="section-subtitle" data-i18n="portfolio_subtitle">Kompletne realizacje stron internetowych i identyfikacji wizualnych.</p>
+                
+                <div class="projects-grid">
+                    <a href="lunar-ceramics/lunar-ceramics.html" class="project-item">
+                        <img src="lunar-ceramics/images/Lunar-Ceramics-Coffee-Brand-Mockup-2.png" alt=" " class="project-img">
+                        <div class="project-overlay">
+                            <h3 class="project-title" data-i18n="proj1_title">Lunar Ceramics</h3>
+                            <p class="project-desc" data-i18n="proj1_desc">Identyfikacja wizualna i opakowania.</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <div class="card fade-in" id="design">
+            <section class="design-section">
+                <h2 class="section-title" data-i18n="design_title">Projekty</h2>
+                <p class="section-subtitle" data-i18n="design_subtitle">Proces, ilustracje i eksperymenty wizualne.</p>
+                
+                <div class="design-gallery">
+                    <a href="moodboard/lunar-ceramics-project.html" class="design-item-link">
+                        <div class="design-item">
+                            <img src="lunar-ceramics/images/Lunar-Ceramics-Coffee-Brand-Mockup-2.png" alt="Process">
+                            <div class="design-info">
+                                <span class="tag">Brand Identity</span>
+                                <h4 data-i18n="design_item1">Zaprojektowanie identyfikacji wizualnej dla marki kawowej/ceramicznej.</h4>
+                                <p class="view-project" data-i18n="see_moodboard">Zobacz Moodboard →</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <div class="card fade-in" id="kontakt">
+            <footer class="contact-section">
+                <h2 class="section-title" data-i18n="talk_title">Porozmawiajmy</h2>
+                <p class="bio" data-i18n="talk_desc">Stwórzmy razem coś wyjątkowego. Jeśli masz pomysł na projekt lub potrzebujesz wsparcia grafika – zapraszam do kontaktu.</p>
+                <div class="contact-details">
+                    <a href="mailto:p.lumiesent@gmail.com" class="contact-link">
+                        <span class="contact-label">Email:</span> p.lumiesent@gmail.com
+                    </a>
+                    <a href="https://instagram.com/lumiesent" target="_blank" class="contact-link">
+                        <span class="contact-label">Instagram:</span> @lumiesent
+                    </a>
+                </div>
+            </footer>
+        </div>
+
+         <footer class="page-footer">
+                <p class="brand-name">Lumiesent</p>
+                <p style="font-size: 14px; color: var(--text-secondary);">2026 • Patryk Czyżewski</p>
+        </footer>
+    </main>
+
+<!--
     <main class="container fade-in" id="portfolio">
         <div class="card">
             
@@ -45,7 +106,7 @@
                 <div class="projects-grid">
                     
                     <a href="lunar-ceramics/lunar-ceramics.html" class="project-item">
-                        <img src="lunar-ceramics/Lunar-Ceramics-Coffee-Brand-Mockup-2.png" alt=" " class="project-img">
+                        <img src="lunar-ceramics/images/Lunar-Ceramics-Coffee-Brand-Mockup-2.png" alt=" " class="project-img">
                         <div class="project-overlay">
                             <h3 class="project-title" data-i18n="proj1_title">Lunar Ceramics</h3>
                             <p class="project-desc" data-i18n="proj1_desc">Identyfikacja wizualna, strona internetowa i opakowania.</p>
@@ -76,7 +137,7 @@
                             <p class="project-desc" data-i18n="proj4_desc">Zbiór znaków z 2023 roku</p>
                         </div>
                     </a>
--->
+
                 </div>
             </section>
 
@@ -98,6 +159,7 @@
 
         </div>
     </main>
+-->
 
     <script src="script.js"></script>
 </body>
