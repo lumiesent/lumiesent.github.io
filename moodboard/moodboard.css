@@ -128,6 +128,9 @@ body {
     aspect-ratio: 4 / 5;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
+    
+    /* DODANE: Zamienia kafelek w kontener skalujący */
+    container-type: inline-size; 
 }
 
 .mood-tile:hover {
@@ -145,15 +148,25 @@ body {
 
 .mood-text-part {
     flex: 1;
-    padding: 40px;
+    /* Padding też skaluje się razem z kafelkiem */
+    padding: clamp(20px, 8cqw, 40px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
 }
 
-.mood-text-part h4 { font-size: 24px; margin-bottom: 15px; }
-.mood-text-part p { font-size: 17px; line-height: 1.6; color: var(--text-secondary); }
+.mood-text-part h4 { 
+    /* clamp(Minimum, Proporcja Kafelka, Maksimum) */
+    font-size: clamp(18px, 7cqw, 28px); 
+    margin-bottom: clamp(8px, 3cqw, 15px); 
+}
+
+.mood-text-part p { 
+    font-size: clamp(14px, 4.5cqw, 18px); 
+    line-height: 1.6; 
+    color: var(--text-secondary); 
+}
 
 /* =========================================
    ANIMACJE I RWD
@@ -165,7 +178,11 @@ body {
     transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (max-width: 1200px) { .moodboard-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1200px) 
+{ 
+    .moodboard-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
     .moodboard-grid { grid-template-columns: 1fr; }
     .mood-tile.split-x { flex-direction: column; }

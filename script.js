@@ -24,7 +24,17 @@ document.addEventListener("DOMContentLoaded", () => {
             proj4_title: "Logo Folio",
             proj4_desc: "Zbiór znaków z 2023 roku",
             talk_title: "Porozmawiajmy",
-            talk_desc: "Stwórzmy razem coś wyjątkowego. Jeśli masz pomysł na projekt lub potrzebujesz wsparcia grafika – zapraszam do kontaktu."
+            talk_desc: "Stwórzmy razem coś wyjątkowego. Jeśli masz pomysł na projekt lub potrzebujesz wsparcia grafika – zapraszam do kontaktu.",
+            
+            // --- MOODBOARD TŁUMACZENIA ---
+            mb_back: "← Wróć do Portfolio",
+            mb_subtitle: "Identyfikacja wizualna & Opakowania",
+            mb_signet_title: "Sygnet",
+            mb_signet_desc: "Chciałem by sygnet przedstawiał połączenie między kubkiem do kawy i wyrobem z gliny.",
+            mb_brand_title: "Marka",
+            mb_brand_desc: "Marka bazuje na usługach, w tym usłudze kawiarnianej.",
+            mb_colors_title: "Kolorystyka",
+            mb_colors_desc: "Zastosowałem ziemiste barwy, które nawiązują bezpośrednio do gliny i kawy."
         },
         en: {
             design_menu: "Projects",
@@ -49,13 +59,23 @@ document.addEventListener("DOMContentLoaded", () => {
             proj4_title: "Logo Folio",
             proj4_desc: "Collection of logos from 2023",
             talk_title: "Let's Talk",
-            talk_desc: "Let’s create something great together. If you have a project in mind or need a hand with design, I’m just a message away."
+            talk_desc: "Let’s create something great together. If you have a project in mind or need a hand with design, I’m just a message away.",
+            
+            // --- MOODBOARD TŁUMACZENIA ---
+            mb_back: "← Back to Portfolio",
+            mb_subtitle: "Visual Identity & Packaging",
+            mb_signet_title: "Signet",
+            mb_signet_desc: "I wanted the signet to represent the connection between a coffee cup and clay pottery.",
+            mb_brand_title: "Brand",
+            mb_brand_desc: "The brand is based on services, including a cafe service.",
+            mb_colors_title: "Colors",
+            mb_colors_desc: "I used earthy tones that directly relate to clay and coffee."
         }
     };
 
     // Funkcja zmieniająca język
     function setLanguage(lang) {
-        // Znajdź wszystkie elementy, które mają atrybut data-i18n
+        // Podmiana tekstów
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
@@ -63,66 +83,57 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Zmień klasę aktywną dla flag
-        document.getElementById('lang-pl').classList.toggle('active', lang === 'pl');
-        document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+        // Bezpieczna zmiana flag (tylko na głównej stronie gdzie istnieją przyciski)
+        const btnPl = document.getElementById('lang-pl');
+        const btnEn = document.getElementById('lang-en');
+        if (btnPl && btnEn) {
+            btnPl.classList.toggle('active', lang === 'pl');
+            btnEn.classList.toggle('active', lang === 'en');
+        }
         
-        // Zapisz wybór użytkownika w pamięci przeglądarki
+        // Zapis wyboru
         localStorage.setItem('preferredLanguage', lang);
     }
 
-    // Podpięcie przycisków
-    document.getElementById('lang-pl').addEventListener('click', () => setLanguage('pl'));
-    document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+    // Podpięcie przycisków (tylko jeśli istnieją w dokumencie)
+    const btnPl = document.getElementById('lang-pl');
+    const btnEn = document.getElementById('lang-en');
+    if (btnPl) btnPl.addEventListener('click', () => setLanguage('pl'));
+    if (btnEn) btnEn.addEventListener('click', () => setLanguage('en'));
 
-    // Sprawdzenie czy użytkownik miał już zapisany język
+    // Ustawienie początkowego języka
     const savedLanguage = localStorage.getItem('preferredLanguage') || 'pl';
     setLanguage(savedLanguage);
 
     // === 2. PŁYNNE POJAWIANIE SIĘ NA SCROLLU ===
-    
-    // Ożywiamy sekcję HERO od razu po załadowaniu strony
     const hero = document.querySelector('.hero.fade-in');
     if (hero) {
-        // Opóźniamy minimalnie (100ms) wejście, by uzyskać kinowy efekt
-        setTimeout(() => {
-            hero.classList.add('visible');
-        }, 100);
+        setTimeout(() => { hero.classList.add('visible'); }, 100);
     }
 
-    // Przygotowujemy wykrywacz scrolla dla reszty elementów
     const faders = document.querySelectorAll('.fade-in:not(.hero)');
-    
-    // Ustawienia: element ma się pojawić, gdy 15% jego wysokości wejdzie w ekran
-    const appearOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
-    };
+    const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
 
     const appearOnScroll = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-                return; // Elementu jeszcze nie widać na ekranie
-            } else {
-                // Element się pojawił! Dodajemy klasę i wyłączamy nasłuchiwanie
+            if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
     }, appearOptions);
 
-    // Przypisujemy nasz wykrywacz do każdej karty/sekcji z klasą fade-in
-    faders.forEach(fader => {
-        appearOnScroll.observe(fader);
-    });
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
 
     // === 3. OBSŁUGA ZNIKAJĄCEJ STRZAŁKI ===
     const scrollArrow = document.querySelector('.scroll-down');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 150) {
-            scrollArrow.classList.add('hidden');
-        } else {
-            scrollArrow.classList.remove('hidden');
-        }
-    });
+    if (scrollArrow) { // Zabezpieczenie dla stron bez strzałki
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 150) {
+                scrollArrow.classList.add('hidden');
+            } else {
+                scrollArrow.classList.remove('hidden');
+            }
+        });
+    }
 });
