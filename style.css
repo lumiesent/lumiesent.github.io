@@ -39,7 +39,6 @@ html {
    GŁÓWNE TŁO I ZAZNACZANIE TEKSTU
    ========================================= */
 body {
-    /* Pływające, miękkie tło gradientowe */
     background: linear-gradient(
         -45deg, 
         var(--color-vanilla), 
@@ -58,7 +57,6 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Własny kolor zaznaczania tekstu */
 ::selection {
     background-color: var(--accent-primary); 
     color: var(--bg-color); 
@@ -221,7 +219,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px; /* Odstęp między osobnymi kartami */
+    gap: 60px;
 }
 
 .card {
@@ -278,7 +276,6 @@ body {
     background-color: var(--accent-primary); 
 }
 
-/* 1. GŁÓWNY KONTENER TEKSTÓW */
 .project-overlay {
     position: absolute;
     top: 0;
@@ -292,11 +289,9 @@ body {
     justify-content: flex-end; 
     align-items: center;
     padding: 20px 20px 30px 20px;
-    
     pointer-events: none; 
 }
 
-/* 2. SZTUCZNA WARSTWA Z TŁEM (Gradient i Szkło) */
 .project-overlay::before {
     content: "";
     position: absolute;
@@ -314,18 +309,15 @@ body {
     
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    
     mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
     
     z-index: -1; 
     pointer-events: none; 
-    
     opacity: 0; 
     transition: opacity 0.4s ease;
 }
 
-/* 3. TEKSTY W KARTACH */
 .project-overlay .project-title {
     color: var(--bg-color);
     font-size: 32px;
@@ -348,7 +340,6 @@ body {
     text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-/* EFEKT SZUMU (ZIARNA) DLA PROJEKTÓW */
 .project-item::after {
     content: "";
     position: absolute;
@@ -364,7 +355,6 @@ body {
     mix-blend-mode: overlay; 
 }
 
-/* AKCJE HOVER NA PROJEKTACH */
 .project-item:hover::after { opacity: 0.4; }
 .project-item:hover .project-img { transform: scale(1.1); }
 .project-item:hover .project-overlay::before { opacity: 1; }
@@ -372,76 +362,7 @@ body {
 .project-item:hover .project-overlay .project-desc { transform: translateY(0); opacity: 1; }
 
 /* =========================================
-   DESIGN LAB (Ilustracje i Mockupy)
-   ========================================= */
-.design-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.design-item {
-    background: rgba(255, 255, 255, 0.8); /* Bardziej nieprzezroczyste, białe tło */
-    border: 2px solid var(--accent-primary); /* Wyraźna oliwkowa ramka */
-    border-radius: 20px;
-    padding: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Dodatkowy efekt: karta lekko się unosi po najechaniu */
-.design-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px var(--shadow-color);
-}
-
-.design-item img {
-    width: 100%;
-    border-radius: 12px;
-    display: block;
-}
-
-.design-info {
-    text-align: left;
-    margin-top: 15px;
-}
-
-/* Usuwamy formatowanie linku, by nie psuło designu kafelka */
-.design-item-link {
-    text-decoration: none;
-    display: block;
-    color: inherit; /* Dziedziczy Twój kolor brązowy */
-}
-
-/* Aktualizujemy hover na nową strukturę */
-.design-item-link:hover .design-item {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px var(--shadow-color);
-    border-color: var(--accent-secondary); /* Ramka zmienia kolor na ciemniejszy przy najechaniu */
-}
-
-/* Styl dla tekstu pomocniczego "Zobacz Moodboard" */
-.view-project {
-    margin-top: 15px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--accent-primary);
-    transition: color 0.3s ease;
-}
-
-.design-item-link:hover .view-project {
-    color: var(--accent-secondary);
-}
-
-.tag {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--accent-primary);
-    font-weight: 600;
-}
-
-/* =========================================
-   SEKCJA KONTAKTOWA
+   SEKCJA KONTAKTOWA I STOPKA
    ========================================= */
 .contact-details {
     display: flex;
@@ -475,21 +396,15 @@ body {
 }
 
 .page-footer {
-    /* 1. Dużo więcej pustej przestrzeni nad stopką (zwiększone z 40px na 120px) */
     margin-top: 25px; 
     padding-top: 80px;
-    
-    /* 2. Wyraźniejsza linia oddzielająca */
     border-top: 2px solid var(--accent-primary); 
-    
-    /* 3. Wymuszenie idealnego centrowania */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 100%;
 }
-
 
 /* =========================================
    ANIMACJE FADE-IN
@@ -518,17 +433,10 @@ body {
         gap: 30px;
     }
 
-    .design-gallery {
-        display: grid;
-        grid-template-columns: 1fr; 
-    }
-
-    /* Wymuszamy stałą widoczność tła (szkło + gradient) */
     .project-overlay::before {
         opacity: 1 !important; 
     }
 
-    /* Wymuszamy stałą widoczność i pozycję napisów */
     .project-overlay .project-title {
         opacity: 1 !important;
         transform: translateY(0) !important;
@@ -542,7 +450,10 @@ body {
         font-size: 16px;
     }
 
-    /* Utrzymujemy stałą widoczność szumu */
+    main.container {
+        padding-top: 0px !important; 
+    }
+
     .project-item::after,
     .project-item:hover::after {
         opacity: 0.3 !important; 

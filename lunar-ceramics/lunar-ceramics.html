@@ -10,6 +10,7 @@
     
     <style>
         :root {
+            --c-vanilla: #F0EAD2;
             --c-beige: #F8F0E5;
             --c-brown-main: #956B4B;
             --c-brown-learn: #664933;
@@ -34,11 +35,43 @@
 
         body {
             /* Tło widoczne poza kontenerem na dużych ekranach */
-            background-color: #F0EAD2; 
+            background-color: var(--c-vanilla);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             padding: 40px 20px;
             min-height: 100vh;
+        }
+
+        /* --- NAWIGACJA POWROTNA NA GÓRZE --- */
+        .top-return-nav {
+            display: flex;
+            width: 100%;
+            max-width: 1280px; 
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+            z-index: 100;
+            background-color: var(--c-beige);
+        }
+
+        .btn-return {
+            text-decoration: none;
+            color: var(--text-dark); 
+            border: 2px solid #ADC178; 
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .btn-return:hover {
+            background-color: #ADC178;
         }
 
         /* --- GŁÓWNY KONTENER --- */
@@ -81,8 +114,8 @@
             display: flex;
             align-items: center;
             gap: 40px;
-            position: relative; /* Dodane: pozwala na użycie z-index */
-            z-index: 10;        /* Dodane: wyciąga menu na wierzch, ponad logo */
+            position: relative; 
+            z-index: 10;        
         }
 
         nav a {
@@ -329,23 +362,19 @@
             margin-bottom: 20px;
         }
 
-
         /* =========================================
            MEDIA QUERIES - RESPONSYWNOŚĆ
            ========================================= */
-
-        /* Dla dużych ekranów (np. desktopy) */
         @media (max-width: 1420px) {
             body { 
                 padding: 0; 
-                background-color: var(--c-brown-main); 
+                background-color: var(--c-vanilla);
             }
             .website-container { 
                 border-radius: 0; 
             }
         }
 
-        /* Dla tabletów i mniejszych laptopów */
         @media (max-width: 1224px) {
             header {
                 flex-direction: column;
@@ -422,8 +451,18 @@
             }
         }
  
-        /* Dla bardzo małych ekranów (np. smartfony) */
         @media (max-width: 768px) {
+            .top-return-nav {
+                flex-direction: column;
+
+                padding: 20px;
+                
+            }
+            .btn-return {
+                max-width: 100%;
+                width: 100%;
+            }
+
             header {
                 flex-direction: column;
                 padding: 60px;
@@ -450,16 +489,14 @@
             
             footer { padding: 40px 20px; }
 
-            /* Styl dla Twojego nazwiska w stopce */
             .footer .brand-name {
                 font-size: 22px;
                 font-weight: 500;
                 color: var(--accent-secondary);
                 margin-bottom: 10px;
-                display: block; /* Gwarantuje, że nazwisko zajmie osobny wiersz */
+                display: block; 
             }
 
-            /* Dodatkowy opis w stopce */
             .footer p:last-child {
                 font-size: 14px;
                 color: var(--text-secondary);
@@ -478,9 +515,13 @@
     </style>
 </head>
 <body>
-
     <div class="website-container">
-        
+
+        <div class="top-return-nav">
+            <a href="../index.html#websites" class="btn-return" data-i18n="nav_back_websites">← Wróć do Stron</a>
+            <a href="lunar-ceramics-portfolio.html" class="btn-return" data-i18n="nav_view_portfolio">Zobacz w Portfolio →</a>
+        </div>
+
         <header>
             <div class="logo">
                 <img src="images/Lunar-Ceramics-woBg.png" alt="Lunar Ceramics">
@@ -585,6 +626,14 @@
             Follow our journey through the stars and kilns on social media.</p>
             <p style="font-size: 20px; color: #ADC178;">2026 • Patryk Czyżewski • Lumiesent</p>
         </footer>
+        
+        <div class="top-return-nav">
+            <a href="../index.html#websites" class="btn-return" data-i18n="nav_back_websites">← Wróć do Stron</a>
+            <a href="lunar-ceramics-portfolio.html" class="btn-return" data-i18n="nav_view_portfolio">Zobacz w Portfolio →</a>
+        </div>
+
     </div>
+    <script src="../script.js"></script>
 </body>
+
 </html>
