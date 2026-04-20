@@ -381,6 +381,7 @@ body {
     border: 2px solid var(--accent-primary); 
     transition: all 0.3s ease;
     display: inline-block;
+    min-width: 350px;
     margin: 10px;
 }
 
