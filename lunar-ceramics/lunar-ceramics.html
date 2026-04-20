@@ -17,6 +17,7 @@
             --c-tan: #E2C7AA;
             --c-grey-brown: #8F857B;
             --c-taupe: #B19A81;
+            --accent-primary: #c5ae96;
             
             --text-light: #F8F0E5;
             --text-dark: #664933;
@@ -41,6 +42,16 @@
             align-items: center;
             padding: 40px 20px;
             min-height: 100vh;
+        }
+
+        ::selection {
+            background-color: var(--accent-primary); 
+            color: var(--bg-color); 
+        }
+
+        ::-moz-selection {
+            background-color: var(--accent-primary);
+            color: var(--bg-color);
         }
 
         /* --- NAWIGACJA POWROTNA NA GÓRZE --- */
