@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // --- NOWE: NAWIGACJA STRONY PROJEKTU ---
             nav_back_websites: "← Wróć do Stron",
             nav_view_portfolio: "Zobacz w Portfolio →",
+            nav_fullscreen: "Pełny ekran ⛶",
+            nav_collapse: "Zwiń widok ✖",
 
             // --- O MNIE ---
             about_menu: "O mnie",
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             about_desc2: "Wierzę, że dobry design to nie tylko estetyka, ale przede wszystkim funkcjonalność i rozwiązywanie problemów. Zawsze staram się, aby moje projekty były intuicyjne, dostępne i po prostu cieszyły oko.",
             about_skills: "Umiejętności",
             skill_illustration: "Ilustracja",
+            
         },
         en: {
             brand_name: "Patryk Czyżewski",
@@ -86,6 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // --- NOWE: NAWIGACJA STRONY PROJEKTU ---
             nav_back_websites: "← Back to Websites",
             nav_view_portfolio: "View in Portfolio →",
+            nav_fullscreen: "Full Screen ⛶",
+            nav_collapse: "Collapse View ✖",
 
             // --- O MNIE ---
             about_menu: "About",
@@ -106,6 +111,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 element.textContent = translations[lang][key];
             }
         });
+
+        // Uaktualnienie atrybutu lang w tagu <html> (wymagane dla przycisku fullscreen)
+        document.documentElement.lang = lang;
 
         // Bezpieczna zmiana flag (tylko na głównej stronie gdzie istnieją przyciski)
         const btnPl = document.getElementById('lang-pl');
@@ -161,4 +169,29 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // === 4. OBSŁUGA PRZYCISKU PEŁNEGO EKRANU ===
+    function toggleExpandedView() {
+        // Zmiana klasy w body
+        document.body.classList.toggle('expanded-view');
+        
+        const isExpanded = document.body.classList.contains('expanded-view');
+        const currentLang = document.documentElement.lang || 'pl';
+        
+        // Aktualizacja atrybutu i tekstu dla tłumaczeń
+        document.querySelectorAll('.fullscreen-btn').forEach(btn => {
+            if (isExpanded) {
+                btn.setAttribute('data-i18n', 'nav_collapse');
+                btn.textContent = currentLang === 'en' ? "Collapse View ✖" : "Zwiń widok ✖";
+            } else {
+                btn.setAttribute('data-i18n', 'nav_fullscreen');
+                btn.textContent = currentLang === 'en' ? "Full Screen ⛶" : "Pełny ekran ⛶";
+            }
+        });
+    }
+
+    // Podpięcie funkcji pod kliknięcie w guziki
+    document.querySelectorAll('.fullscreen-btn').forEach(button => {
+        button.addEventListener('click', toggleExpandedView);
+    });
 });
