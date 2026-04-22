@@ -433,6 +433,92 @@ body {
 }
 
 /* =========================================
+   SEKCJA O MNIE (WERSJA SYMETRYCZNA 3x3)
+   ========================================= */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    text-align: center;
+}
+
+.about-text-wrapper {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.about-skills-wrapper {
+    width: 100%;
+    max-width: 900px; /* Ograniczenie by siatka nie była zbyt rozstrzelona */
+    gap: 20px;
+}
+
+/* Siatka 5 kolumn (układ 2x5) */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 kolumn */
+    gap: 50px 15px; /* Większy odstęp pionowy (50px), mniejszy poziomy (15px) */
+    width: 100%;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column; /* Tekst pod ikoną */
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.skills-title {
+    font-size: 24px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.skill-item:hover {
+    transform: translateY(-8px);
+}
+
+.skill-icon {
+    width: 60px; /* Nieco większe by lepiej pasowały do układu pionowego */
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-vanilla);
+    border: 2px solid var(--accent-primary);
+    border-radius: 18px;
+    color: var(--text-primary);
+    box-shadow: 0 4px 15px rgba(108, 88, 76, 0.08);
+}
+
+.skill-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.skill-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    max-width: 140px; /* Zapobiega zbyt długim wierszom pod ikoną */
+}
+
+/* =========================================
    ANIMACJE FADE-IN
    ========================================= */
 .fade-in {
@@ -487,5 +573,44 @@ body {
     .project-item::after,
     .project-item:hover::after {
         opacity: 0.3 !important; 
+    }
+
+    .about-content {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .about-text-wrapper {
+        padding: 0 10px;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolumny na tabletach */
+        gap: 30px 15px;
+    }
+    
+    .skill-item {
+        min-width: 180px; /* Nieco ciaśniej na tabletach */
+    }
+
+    .about-skills {
+        padding: 20px;
+    }
+
+    .skills-tags {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr); /* Zostajemy przy 2 kolumnach na telefonach dla symetrii */
+    }
+    .skill-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .skill-name {
+        font-size: 13px;
     }
 }

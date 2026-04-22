@@ -38,7 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // --- NOWE: NAWIGACJA STRONY PROJEKTU ---
             nav_back_websites: "← Wróć do Stron",
-            nav_view_portfolio: "Zobacz w Portfolio →"
+            nav_view_portfolio: "Zobacz w Portfolio →",
+
+            // --- O MNIE ---
+            about_menu: "O mnie",
+            about_title: "O mnie",
+            about_desc1: "Cześć! Jestem kreatywnym projektantem i deweloperem. Odpowiadam za cały proces tworzenia – od pierwszych szkiców i makiet, aż po ostateczne wdrożenie kodu. Projektuję spójne identyfikacje wizualne, użyteczne interfejsy oraz nowoczesne strony internetowe.",
+            about_desc2: "Wierzę, że dobry design to nie tylko estetyka, ale przede wszystkim funkcjonalność i rozwiązywanie problemów. Zawsze staram się, aby moje projekty były intuicyjne, dostępne i po prostu cieszyły oko.",
+            about_skills: "Umiejętności",
+            skill_illustration: "Ilustracja",
         },
         en: {
             brand_name: "Patryk Czyżewski",
@@ -77,7 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // --- NOWE: NAWIGACJA STRONY PROJEKTU ---
             nav_back_websites: "← Back to Websites",
-            nav_view_portfolio: "View in Portfolio →"
+            nav_view_portfolio: "View in Portfolio →",
+
+            // --- O MNIE ---
+            about_menu: "About",
+            about_title: "About Me",
+            about_desc1: "Hi! I am a creative designer and developer. I handle the entire creation process – from initial sketches and wireframes to final code implementation. I design cohesive visual identities, usable interfaces, and modern websites.",
+            about_desc2: "I believe that good design is not just about aesthetics, but above all about functionality and problem-solving. I always strive to make my projects intuitive, accessible, and simply pleasing to the eye.",
+            about_skills: "Skills",
+            skill_illustration: "Illustration",
         }
     };
 
