@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimbus Brew - Coffee House</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Livvic:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --c-vanilla: #F0EAD2;
+            --c-beige: #F3E5DC;
+            --c-brown-dark: #684B32;
+            --c-brown-light: #B08968;
+            --c-green: #517A43;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--c-vanilla);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Livvic', sans-serif;
+            color: var(--c-brown-dark);
+            overflow-x: hidden;
+            /* Zapożyczone z Lunar: Padding i przejścia dla widoku "karty" */
+            padding: 40px 20px;
+            transition: padding 0.3s ease;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1280px;
+            background-color: var(--c-brown-light);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            /* Zapożyczone z Lunar: Zaokrąglenia brzegów głównego widoku */
+            border-radius: 40px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- TOP & BOTTOM NAV BAR (ZAPOŻYCZONE Z LUNAR) --- */
+        .top-return-nav {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+            z-index: 100;
+            background-color: var(--c-brown-light);
+            position: relative;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        .bottom-return-nav {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        .btn-return {
+            text-decoration: none;
+            color: var(--c-beige); 
+            border: 2px solid var(--c-beige); 
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            max-width: 300px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn-return:hover {
+            background-color: var(--c-green);
+            color: #fff;
+        }
+
+        /* --- KLASY DLA TRYBU ROZSZERZONEGO --- */
+        body.expanded-view {
+            padding: 0;
+        }
+
+        body.expanded-view .main-container {
+            max-width: 100%;
+            border-radius: 0;
+            min-height: 100vh;
+        }
+
+        body.expanded-view .top-return-nav,
+        body.expanded-view .bottom-return-nav {
+            border-radius: 0;
+        }
+
+        /* --- NAVIGATION --- */
+        .nav-bar {
+            position: absolute;
+            top: 85px; /* Obniżone ze względu na nowy górny pasek */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1054px;
+            height: 106px;
+            background-color: var(--c-beige);
+            box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.30);
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            z-index: 50;
+            padding: 0 20px;
+        }
+
+        .nav-bar a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 55px;
+            padding: 0 35px;
+            text-decoration: none;
+            color: var(--c-brown-dark);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2.40px;
+            border: 1px dashed var(--c-brown-dark);
+            border-radius: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar a:hover {
+            background-color: var(--c-brown-dark);
+            color: var(--c-beige);
+            border-style: solid;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 1002px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(4px);
+            transform: scale(1.05);
+        }
+
+        .hero-logo {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* --- SECTION STRUCTURE --- */
+        .green-bg {
+            width: 100%;
+            background-color: var(--c-green);
+            padding: 0 20px 100px 20px; 
+            display: flex;
+            justify-content: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25), 0px -4px 8px rgba(0, 0, 0, 0.25);
+            position: relative;
+            z-index: 2; 
+        }
+
+        .green-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E");
+            z-index: 1;
+        }
+
+        .image-divider {
+            width: 100%;
+            height: 611px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- CONTENT CARDS --- */
+        .content-card {
+            width: 100%;
+            max-width: 1054px;
+            background-color: var(--c-beige);
+            border-radius: 10px;
+            box-shadow: 0px 32px 32px 1px rgba(0, 0, 0, 0.25);
+            margin-top: -100px; 
+            margin-bottom: 0;
+            position: relative;
+            z-index: 20;
+            padding: 60px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            color: var(--c-brown-light);
+            font-size: 64px;
+            font-family: 'Lily Script One', cursive;
+            font-weight: 400;
+            letter-spacing: 6.40px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .separator {
+            width: 100%;
+            max-width: 900px;
+            border-top: 2px solid var(--c-brown-dark);
+            margin-bottom: 45px;
+        }
+
+        .text-body {
+            width: 100%;
+            max-width: 900px;
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 3.20px;
+            line-height: 1.5;
+            color: var(--c-brown-dark);
+        }
+
+        /* --- MENU LAYOUT --- */
+        .menu-grid {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px 100px;
+        }
+
+        .menu-column {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .menu-category h3 {
+            color: var(--c-brown-light);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 3.60px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: baseline;
+            width: 100%;
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--c-brown-dark);
+        }
+
+        .menu-item::after {
+            content: '';
+            flex-grow: 1;
+            border-bottom: 2px dotted var(--c-brown-dark);
+            margin: 0 10px;
+            opacity: 0.5;
+        }
+
+        .menu-item .price {
+            order: 1;
+            font-weight: 700;
+        }
+
+        /* --- FAQ LAYOUT --- */
+        .faq-block {
+            width: 100%;
+            max-width: 900px;
+            font-size: 24px;
+            letter-spacing: 2.40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            line-height: 1.5;
+        }
+
+        .faq-block strong {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* --- CONTACT LAYOUT --- */
+        .contact-block {
+            width: 100%;
+            max-width: 900px;
+            font-size: 32px;
+            letter-spacing: 3.20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            text-align: center;
+        }
+
+        .contact-block strong {
+            font-weight: 700;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            width: 100%;
+            background-color: var(--c-brown-dark);
+            padding: 180px 20px 40px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -100px;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-text { color: var(--c-beige); }
+
+        .footer-text h4 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2.40px;
+            margin-bottom: 20px;
+        }
+
+        .footer-text p {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1.60px;
+            opacity: 0.8;
+        }
+
+        .footer-credits {
+            color: #ADC178;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding-bottom: 20px;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 1100px) {
+            .nav-bar { flex-wrap: wrap; height: auto; padding: 20px; gap: 15px; border-radius: 0; }
+            .nav-bar a { font-size: 20px; padding: 0 20px; height: 45px;}
+            .content-card { width: 100%; padding: 60px 40px; margin-top: -120px; }
+            .green-bg { margin-top: 0px; padding-bottom: 80px; }
+            .hero-logo { width: 100%; height: 100%; aspect-ratio: 1; }
+            .section-title { font-size: 48px; }
+            .text-body, .contact-block { font-size: 24px; }
+            .menu-grid { gap: 40px 60px; }
+        }
+
+        @media (max-width: 768px) {
+            /* Nowe responsywne poprawki dla nawigacji karty */
+            body { padding: 0; }
+            .main-container { border-radius: 0; }
+            .top-return-nav { flex-direction: column; padding: 20px; border-top-left-radius: 0px; border-top-right-radius: 0px; }
+            .bottom-return-nav { border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; }
+            .btn-return { max-width: 100%; width: 100%; }
+            .nav-bar { top: 220px; } /* Ustalenie położenia menu pod spiętrzonymi przyciskami */
+            
+
+            .hero { height: 600px; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .image-divider { height: 400px; }
+            .content-card { padding: 40px 20px; margin-top: -80px;}
+            .green-bg { margin-top: 0px; padding-bottom: 60px; }
+            .section-title { font-size: 36px; letter-spacing: 2px; }
+            .text-body, .contact-block { font-size: 18px; letter-spacing: 1px; text-align: left; }
+            .faq-block { font-size: 18px; letter-spacing: 1px; }
+            .menu-category h3 { font-size: 20px; }
+            .menu-item { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+
+        <div class="top-return-nav">
+            <a href="../index.html#websites" class="btn-return" data-i18n="nav_back_websites">← Wróć do Stron</a>
+            <button class="btn-return fullscreen-btn" data-i18n="nav_fullscreen">Pełny ekran ⛶</button>
+            <a href="nimbus-brew-portfolio.html" class="btn-return" data-i18n="nav_view_portfolio">Zobacz w Portfolio →</a>
+        </div>
+
+        <nav class="nav-bar">
+            <a href="#coffee">Coffee</a>
+            <a href="#menu">Menu</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <header class="hero">
+            <img src="images/https://placehold.co/1335x1002" alt="Coffee Shop Background" class="hero-bg">
+            <img src="images/Storefront_Mockup.png" alt="Nimbus Brew Logo" class="hero-logo">
+        </header>
+
+        <section id="about">
+            <div class="green-bg">
+                <div class="content-card">
+                    <h2 class="section-title">About us</h2>
+                    <div class="separator"></div>
+                    <div class="text-body">
+                        At Nimbus Brew, we believe every cup of coffee should be a brief escape from the daily hustle.<br><br>
+                        Our cafe was born from a passion for craftsmanship and the dream of creating a space where time slows down and aromas drift like light clouds over the city.<br><br>
+                        We are a team of enthusiasts dedicated to the art of brewing, providing a sanctuary where you can find your "moment in the clouds" right in the heart of the neighborhood.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="coffee">
+            <img src="images/Coffee_Brand_Mockup.jpg" alt="Coffee Pouring" class="image-divider">
+            <div class="green-bg">
+                <div class="content-card">
+                    <h2 class="section-title">About our Coffee</h2>
+                    <div class="separator"></div>
+                    <div class="text-body">
+                        The soul of Nimbus Brew lies in our carefully selected Single Origin beans and signature blends. We work closely with sustainable farms to source only the highest quality cherries, roasted in small batches to highlight their unique profiles.<br><br>
+                        Whether you prefer a bold, classic Espresso or the nuanced clarity of a pour-over, we guarantee an ethical, traceable, and exceptional coffee experience in every sip.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu">
+            <img src="images/Free_Paper_Bag_Mockup.jpg" alt="Coffee Beans Bag" class="image-divider">
+            <div class="green-bg">
+                <div class="content-card">
+                    <h2 class="section-title">Menu</h2>
+                    <div class="separator"></div>
+                    
+                    <div class="menu-grid">
+                        <div class="menu-column">
+                            <div class="menu-category">
+                                <h3>Coffee Menu</h3>
+                                <div class="menu-item"><span class="name">Espresso</span><span class="price">$3.00</span></div>
+                                <div class="menu-item"><span class="name">Americano</span><span class="price">$3.50</span></div>
+                                <div class="menu-item"><span class="name">Latte</span><span class="price">$4.50</span></div>
+                                <div class="menu-item"><span class="name">Cappuccino</span><span class="price">$4.50</span></div>
+                                <div class="menu-item"><span class="name">Flat White</span><span class="price">$4.25</span></div>
+                                <div class="menu-item"><span class="name">Mocha</span><span class="price">$5.00</span></div>
+                                <div class="menu-item"><span class="name">Macchiato</span><span class="price">$3.75</span></div>
+                                <div class="menu-item"><span class="name">Cold Brew</span><span class="price">$4.75</span></div>
+                                <div class="menu-item"><span class="name">Vanilla Latte</span><span class="price">$5.25</span></div>
+                                <div class="menu-item"><span class="name">Caramel Macchiato</span><span class="price">$5.50</span></div>
+                            </div>
+                            <div class="menu-category">
+                                <h3>Light Bites</h3>
+                                <div class="menu-item"><span class="name">Avocado Toast</span><span class="price">$9.00</span></div>
+                                <div class="menu-item"><span class="name">Greek Yogurt Parfait</span><span class="price">$6.50</span></div>
+                                <div class="menu-item"><span class="name">Breakfast Bagel</span><span class="price">$7.50</span></div>
+                            </div>
+                        </div>
+
+                        <div class="menu-column">
+                            <div class="menu-category">
+                                <h3>Tea & More</h3>
+                                <div class="menu-item"><span class="name">Earl Grey</span><span class="price">$3.25</span></div>
+                                <div class="menu-item"><span class="name">Green Tea Jasmine</span><span class="price">$3.25</span></div>
+                                <div class="menu-item"><span class="name">Peppermint Tea</span><span class="price">$3.25</span></div>
+                                <div class="menu-item"><span class="name">Chai Latte</span><span class="price">$4.75</span></div>
+                                <div class="menu-item"><span class="name">Matcha Latte</span><span class="price">$5.25</span></div>
+                                <div class="menu-item"><span class="name">Hot Chocolate</span><span class="price">$4.50</span></div>
+                            </div>
+                            <div class="menu-category">
+                                <h3>Bakery & Sweets</h3>
+                                <div class="menu-item"><span class="name">Butter Croissant</span><span class="price">$3.50</span></div>
+                                <div class="menu-item"><span class="name">Chocolate Muffin</span><span class="price">$3.75</span></div>
+                                <div class="menu-item"><span class="name">Cheesecake</span><span class="price">$6.00</span></div>
+                                <div class="menu-item"><span class="name">Brownie</span><span class="price">$5.50</span></div>
+                                <div class="menu-item"><span class="name">Apple Tart</span><span class="price">$5.75</span></div>
+                                <div class="menu-item"><span class="name">Lemon Cake</span><span class="price">$4.50</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <img src="images/aNimbus_Brew Logo_wBg.jpg" alt="Cafe Interior" class="image-divider">
+            <div class="green-bg">
+                <div class="content-card">
+                    <h2 class="section-title">FAQ</h2>
+                    <div class="separator"></div>
+                    <div class="faq-block">
+                        <p><strong>Q: Do you offer plant-based milk alternatives?</strong>
+                        A: Absolutely! We believe great coffee should be accessible to everyone. We offer high-quality oat, almond, and soy milk to pair perfectly with your favorite brew.</p>
+                        
+                        <p><strong>Q: Are your pastries baked fresh?</strong>
+                        A: Yes! All our croissants, muffins, and cakes are delivered every morning from our favorite local artisan bakery. We prioritize natural ingredients and traditional recipes.</p>
+                        
+                        <p><strong>Q: Is Nimbus Brew a laptop-friendly space?</strong>
+                        A: Definitely. We provide high-speed Wi-Fi and plenty of power outlets, making our cafe the perfect spot for remote work, creative brainstorming, or a quiet study session.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <img src="images/Free_90x50mm_Business_Card_Mockup_5 1.jpg" alt="Contact Us" class="image-divider">
+            <div class="green-bg" style="border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
+                <div class="content-card">
+                    <h2 class="section-title">Contact</h2>
+                    <div class="separator"></div>
+                    <div class="contact-block">
+                        <p><span>Phone: </span><strong>+48 123 456 789</strong></p>
+                        <p><span>SMS: </span><strong>+48 987 654 321</strong></p>
+                        <p><span>E-mail: </span><strong>contact@nimbusbrew.com</strong></p>
+                        <p><span>Instagram: </span><strong>@nimbusbrew</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-text">
+                <h4>Nimbus Brew – Your daily moment in the clouds.</h4>
+                <p>© 2026 Nimbus Brew Coffee House. All rights reserved. Follow our journey on Instagram & TikTok: @nimbusbrew</p>
+            </div>
+            <div class="footer-credits">
+                2026 • Patryk Czyżewski • Lumiesent
+            </div>
+        </footer>
+
+        <div class="top-return-nav bottom-return-nav">
+            <a href="../index.html#websites" class="btn-return" data-i18n="nav_back_websites">← Wróć do Stron</a>
+            <button class="btn-return fullscreen-btn" data-i18n="nav_fullscreen">Pełny ekran ⛶</button>
+            <a href="nimbus-brew-portfolio.html" class="btn-return" data-i18n="nav_view_portfolio">Zobacz w Portfolio →</a>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fullscreenBtns = document.querySelectorAll('.fullscreen-btn');
+            
+            fullscreenBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Dodaje/usuwa klasę 'expanded-view' do elementu body
+                    document.body.classList.toggle('expanded-view');
+                    
+                    // Aktualizacja tekstu na przyciskach w zależności od trybu
+                    const isExpanded = document.body.classList.contains('expanded-view');
+                    fullscreenBtns.forEach(b => {
+                        b.innerHTML = isExpanded ? 'Zwiń ekran ⛶' : 'Pełny ekran ⛶';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

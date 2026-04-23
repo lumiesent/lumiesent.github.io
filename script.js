@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
             proj1_desc: "Strona internetowa.",
             proj2_title: "Lunar Ceramics",
             proj2_desc: "Identyfikacja wizualna kawiarni oraz pracowni ceramiki.",
+            website2_title: "Nimbus Brew",
+            website2_desc: "Strona internetowa.",
             
             talk_title: "Porozmawiajmy",
             talk_desc: "Stwórzmy razem coś wyjątkowego. Jeśli masz pomysł na projekt lub potrzebujesz wsparcia grafika – zapraszam do kontaktu.",
@@ -71,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
             proj1_desc: "Website",
             proj2_title: "Lunar Ceramics",
             proj2_desc: "Visual identity for a cafe and ceramics workshop.",
+            website2_title: "Nimbus Brew",
+            website2_desc: "Website",
             
             talk_title: "Let's Talk",
             talk_desc: "Let’s create something great together. If you have a project in mind or need a hand with design, I’m just a message away.",
