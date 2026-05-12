@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // --- O MNIE ---
             about_menu: "O mnie",
             about_title: "O mnie",
-            about_desc1: "Cześć! Jestem kreatywnym projektantem i deweloperem. Odpowiadam za cały proces tworzenia – od pierwszych szkiców i makiet, aż po ostateczne wdrożenie kodu. Projektuję spójne identyfikacje wizualne, użyteczne interfejsy oraz nowoczesne strony internetowe.",
+            about_desc1: "Jestem kreatywnym projektantem i deweloperem. Odpowiadam za cały proces tworzenia – od pierwszych szkiców i makiet, aż po ostateczne wdrożenie kodu. Projektuję spójne identyfikacje wizualne, użyteczne interfejsy oraz nowoczesne strony internetowe.",
             about_desc2: "Wierzę, że dobry design to nie tylko estetyka, ale przede wszystkim funkcjonalność i rozwiązywanie problemów. Zawsze staram się, aby moje projekty były intuicyjne, dostępne i po prostu cieszyły oko.",
-            about_skills: "Umiejętności",
+            about_skills: "Wybrane umiejętności i narzędzia",
             skill_illustration: "Ilustracja",
             
         },
@@ -103,9 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // --- O MNIE ---
             about_menu: "About",
             about_title: "About Me",
-            about_desc1: "Hi! I am a creative designer and developer. I handle the entire creation process – from initial sketches and wireframes to final code implementation. I design cohesive visual identities, usable interfaces, and modern websites.",
+            about_desc1: "I am a creative designer and developer. I handle the entire creation process – from initial sketches and wireframes to final code implementation. I design cohesive visual identities, usable interfaces, and modern websites.",
             about_desc2: "I believe that good design is not just about aesthetics, but above all about functionality and problem-solving. I always strive to make my projects intuitive, accessible, and simply pleasing to the eye.",
-            about_skills: "Skills",
+            about_skills: "Selected Skills and Tools",
             skill_illustration: "Illustration",
         }
     };
@@ -203,3 +203,35 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener('click', toggleExpandedView);
     });
 });
+
+// === 5. FADE OUT TŁA I ZMIANA KOLORU TEKSTU ===
+const heroSection = document.querySelector('.hero');
+const heroBg = document.querySelector('.hero-bg');
+
+if (heroBg && heroSection) {
+    // Na start dodajemy klasę is-light
+    heroSection.classList.add('is-light');
+
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroHeight = window.innerHeight;
+        
+        const progress = Math.min(scrollY / heroHeight, 1);
+        
+        const heroBg = document.querySelector('.hero-bg');
+        const heroContent = document.querySelector('.hero > *:not(.hero-bg)');
+
+        if (heroBg) {
+            // Tło znika i lekko się przesuwa (parallax)
+            heroBg.style.opacity = 1 - progress;
+            heroBg.style.transform = `scale(1.1) translateY(${progress * 50}px)`;
+        }
+        
+        // Treść (napisy) może znikać szybciej, by nie "biła się" z wjeżdżającą kartą
+        if (heroContent) {
+            heroContent.style.opacity = 1 - (progress * 1.5);
+        }
+    });
+
+}
+

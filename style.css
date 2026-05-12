@@ -8,6 +8,11 @@
     --color-olive: #ADC178;
     --color-copper: #A98467;
     --color-brown: #6C584C;
+    --color-dark-brown: #130e0c;
+
+    --color-base-white: #FDFCF7;    /* Prawie biały, bardzo jasny krem */
+    --color-vanilla-soft: #F4F1E6;  /* Delikatny beż na tła sekcji/kart */
+    --color-olive-pale: #B6C494;    /* Przygaszona oliwka (akcent) */
 
     /* 2. PRZYPISANIE FUNKCYJNE */
     --bg-color: var(--color-vanilla);
@@ -25,7 +30,9 @@
 }
 
 html {
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth;
+    scroll-snap-type: none;
+    height: auto;
 }
 
 * {
@@ -106,6 +113,83 @@ body {
     text-align: center;
     padding: 40px 20px;
     position: relative;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 1; /* Hero jest pod spodem */
+    overflow: hidden;
+}
+
+/* Nowe pełnoekranowe tło */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Obraz z przyciemnieniem */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)), 
+        url('images/hero-bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    will-change: opacity, filter;
+
+    /* Rozmycie i powiększenie (skalowanie zapobiega "wchodzeniu" rozmytych krawędzi w głąb ekranu) */
+    filter: blur(10px); 
+    transform: scale(1.1); 
+
+    
+}
+
+/* 1. Ustawienie płynnego przejścia dla wszystkich tekstów w Hero */
+.hero .name, 
+.hero .brand-name, 
+.hero .title, 
+.hero .bio {
+    transition: color 0.5s ease; /* Czas trwania zmiany koloru */
+    position: relative; /* Upewniamy się, że są nad tłem */
+}
+
+/* Imię i nazwisko - najjaśniejszy punkt, czysta biel/krem */
+.hero.is-light .name {
+    color: var(--color-olive-pale); 
+}
+
+/* Nazwisko pod spodem - delikatniejszy, cieplejszy odcień wanilii */
+.hero.is-light .brand-name {
+    color: var(--color-vanilla-soft);
+    opacity: 0.9; /* Subtelne zmiękczenie */
+}
+
+/* Tytuł zawodowy - tutaj dajemy naszą nową, bladą oliwkę jako akcent */
+.hero.is-light .title {
+    color: var(--color-olive-pale);
+}
+
+/* Krótki opis (Bio) - powrót do czytelnej wanilii */
+.hero.is-light .bio {
+    color: var(--color-vanilla-soft);
+}
+
+.hero.is-light .btn {
+    color: var(--color-dark-brown);
+}
+
+.hero.is-light .btn:hover {
+    color: var(--color-vanilla-soft);
+}
+
+.hero.is-light .btn-outline {
+    border-color: var(--color-olive-pale);
+    color: var(--color-vanilla-soft);
+}
+
+.hero.is-light .btn-outline:hover {
+    background: var(--color-olive-pale);
+    color: var(--color-dark-brown);
 }
 
 .profile-img {
@@ -223,8 +307,17 @@ body {
     gap: 60px;
 }
 
+.container {
+    position: relative;
+    z-index: 10; /* Wyższy niż Hero */
+    background: var(--bg-color); /* Musi mieć tło, żeby nie było prześwitów */
+    margin-top: 0; /* Usuwamy ewentualne przerwy */
+    padding-top: 80px; /* Dajemy oddech pierwszej karcie */
+}
+
 .table {
     padding: 20px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
